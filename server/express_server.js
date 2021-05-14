@@ -1,6 +1,5 @@
 const express = require("express")
-const update_mock = require("../mock_data/update_mocks")
-const server = require("../action/server")
+const update_mock = require("../action/update_mocks")
 
 function create_express_server(props) {
     return new Promise((resolve) => {
