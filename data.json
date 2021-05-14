@@ -1,0 +1,28 @@
+[
+    {
+        "name": "Application_A",
+        "port": "3001",
+        "prefix": "/",
+        "apis": [
+            {
+                "endpoint": "/home",
+                "method": "GET",
+                "response": "{\"Name\":\"Sunil\"}",
+                "status": "200"
+            }
+        ]
+    },
+    {
+        "name": "Application_B",
+        "port": "3002",
+        "prefix": "/",
+        "apis": [
+            {
+                "endpoint": "/home",
+                "method": "GET",
+                "response": "{\"Name\":\"Yadav\"}",
+                "status": "200"
+            }
+        ]
+    }
+]

@@ -1,0 +1,9 @@
+{
+  "name": "mock_server",
+  "version": "1.0.0",
+  "description": "Mock Server with Configuraiton Data Provided",
+  "main": "init.js",
+  "author": "Sunil Yadav",
+  "license": "Thoughtworks",
+  "private": true
+}
