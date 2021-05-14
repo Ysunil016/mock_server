@@ -1,6 +1,6 @@
 const fs = require('fs')
 const axios = require('axios');
-const fetch_mock_data = require("../action/mock_data")
+const fetch_mock_data = require("./mock_data")
 
 async function update() {
     return new Promise(async (resolve, reject) => {
