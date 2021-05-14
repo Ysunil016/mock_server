@@ -2,7 +2,7 @@ const fs = require("fs")
 
 const readMockData = async () => {
     return new Promise(async (resolve) => {
-        const fileData = await read_file("./mock_data/data.json")
+        const fileData = await read_file("./data/config.json")
         const jsonData = JSON.parse(fileData)
         resolve(jsonData)
     })

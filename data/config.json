@@ -1,0 +1,44 @@
+[
+    {
+        "name": "Application_A",
+        "port": "3001",
+        "prefix": "/",
+        "apis": [
+            {
+                "endpoint": "/test",
+                "method": "GET",
+                "response": {
+                    "Sunil": "Name"
+                },
+                "status": 200,
+                "update": {
+                    "uri": "http://localhost:8080/sunil",
+                    "token": "",
+                    "method": "GET",
+                    "request_data": ""
+                }
+            }
+        ]
+    },
+    {
+        "name": "Application_B",
+        "port": "3002",
+        "prefix": "/",
+        "apis": [
+            {
+                "endpoint": "/home",
+                "method": "GET",
+                "response": {
+                    "Yadav": "Name"
+                },
+                "status": 200,
+                "update": {
+                    "uri": "http://localhost:8080/yadav",
+                    "token": "",
+                    "method": "GET",
+                    "request_data": ""
+                }
+            }
+        ]
+    }
+]
