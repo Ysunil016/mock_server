@@ -8,7 +8,12 @@
                 "endpoint": "/home",
                 "method": "GET",
                 "response": "{\"Name\":\"Sunil\"}",
-                "status": "200"
+                "status": "200",
+                "update": {
+                    "uri": "",
+                    "token": "",
+                    "method": ""
+                }
             }
         ]
     },
@@ -21,7 +26,12 @@
                 "endpoint": "/home",
                 "method": "GET",
                 "response": "{\"Name\":\"Yadav\"}",
-                "status": "200"
+                "status": "200",
+                "update": {
+                    "uri": "",
+                    "token": "",
+                    "method": ""
+                }
             }
         ]
     }

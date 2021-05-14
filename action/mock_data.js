@@ -1,7 +1,7 @@
 const fs = require("fs")
 
 const readMockData = async () => {
-    const fileData = await read_file("./data.json")
+    const fileData = await read_file("./mock_data/data.json")
     const jsonData = JSON.parse(fileData)
     return jsonData
 }
