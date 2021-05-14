@@ -11,7 +11,7 @@
                 "status": "200",
                 "update": {
                     "uri": "http://localhost:8080/sunil",
-                    "token": "",
+                    "headers": {},
                     "method": "GET",
                     "request_data":""
                 }
@@ -30,7 +30,7 @@
                 "status": "200",
                 "update": {
                     "uri": "http://localhost:8080/yadav",
-                    "token": "",
+                    "headers": {},
                     "method": "GET",
                     "request_data":""
                 }
