@@ -1,21 +1,43 @@
 const express = require("../server/express_server")
-const update_mocks = require("../mock_data/update_mocks")
-const servers = []
+const fetch_mock_data = require("../action/mock_data")
 
-function mock_server(server_props) { start_server_log("Mock Server", server_props); create_server(server_props); }
+var servers = []
 
-const create_server = (props) => { 
-    const server = express.create_express_server(props)
-    servers.push(server)
+async function start(server_props) { server_props.forEach(async (server) => { await mock_server(server) }) }
+
+const mock_server = (server_props) => {
+    return new Promise(async (resolve) => {
+        start_server_log("Mock Server", server_props);
+        const server = await create_server(server_props);
+        servers.push(server)
+        resolve(true)
+    })
+}
+
+const create_server = (props) => {
+    return new Promise(async (resolve) => {
+        const created_server = await express.create_express_server(props)
+        resolve(created_server)
+    })
 }
 
 const start_server_log = (message, props) => { const { name, port } = props; if (name) console.log(message + " on " + port); else throw "Please Specify Correct Server Props" }
 
-function restart_server(){
-    console.log("Restart Server");
+const restart = async () => {
+    return new Promise(async (resolve) => {
+        const new_mock_data = await fetch_mock_data()
+        servers.forEach((server,index) => { 
+            server.close(); 
+        })
+        servers = []
+        await start(new_mock_data);
+        resolve(true);
+    })
 }
 
-function update_sever(server_props) { update_mocks.update(server_props,restart_server) }
+function update_mock() {
+    express.create_mock_update_server(restart)
+}
 
 
-module.exports = { mock_server, update_sever }
+module.exports = { start, update_mock, restart }

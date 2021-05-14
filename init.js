@@ -1,12 +1,17 @@
-const mock_data = require("./action/mock_data")
+const fetch_mock_data = require("./action/mock_data")
 const server = require("./action/server")
 
-mock_data().then(data => { start_mock_servers(data); create_update_mock_data_server(data); }).catch(err => { console.log("Could Not Load Data File " + err); })
+async function start(){
+    const server_props = await fetch_mock_data()
+    start_mock_servers(server_props); 
+    start_update_mock_server(); 
+}
 
 // Mock Server
-const start_mock_servers = (servers) => { servers.forEach(server => { start_servers(server) }); }
-
-const start_servers = (props) => { server.mock_server(props) }
+const start_mock_servers = (servers_props) => { server.start(servers_props); }
 
 // Server, that Updates Mock Data
-const create_update_mock_data_server = (props) => { server.update_sever(props) }
+const start_update_mock_server = () => { server.update_mock() }
+
+// Starting Server
+start()

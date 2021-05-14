@@ -1,16 +1,18 @@
 const express = require("express")
+const update_mock = require("../mock_data/update_mocks")
+const server = require("../action/server")
 
 function create_express_server(props) {
-    const { port, apis } = props
-    const app = express()
+    return new Promise((resolve) => {
+        const { port, apis } = props
+        const app = express()
 
-    add_router_to_server(app, apis)
+        add_router_to_server(app, apis)
 
-    app.listen(port, () => {
-        console.log(`Success! Your application is running on port ${port}.`);
-    }).on('close', () => { console.log("Closing Server on " + port); })
-
-    return app
+        resolve(app.listen(port, () => {
+            console.log(`Success! Your application is running on port ${port}.`);
+        }).on('close', () => { console.log("Closing Server on " + port); }))
+    })
 }
 
 function add_router_to_server(server, apis) {
@@ -21,9 +23,25 @@ function add_router_to_server(server, apis) {
 
 function create_route(server, api) {
     const { endpoint, response, status } = api
-    server.get(endpoint, (req, res) => {
+    server.get(endpoint, (req,res) => {
         res.json(response).status(status)
     })
 }
 
-module.exports = { create_express_server }
+function create_mock_update_server(restart_server) {
+    const app = express()
+    const port = 7890
+
+    app.get("/update_mocks", async (req,res) => {
+        await update_mock.update()
+        await restart_server()
+        
+        res.send("Updated").status(200)
+    })
+
+    app.listen(port, () => {
+        console.log(`Success! Your application is running on port ${port}.`);
+    }).on('close', () => { console.log("Closing Server on " + port); })
+}
+
+module.exports = { create_express_server, create_mock_update_server }

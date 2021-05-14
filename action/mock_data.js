@@ -1,13 +1,15 @@
 const fs = require("fs")
 
 const readMockData = async () => {
-    const fileData = await read_file("./mock_data/data.json")
-    const jsonData = JSON.parse(fileData)
-    return jsonData
+    return new Promise(async (resolve) => {
+        const fileData = await read_file("./mock_data/data.json")
+        const jsonData = JSON.parse(fileData)
+        resolve(jsonData)
+    })
 }
 
 async function read_file(file_path) {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         fs.readFile(file_path, (err, data) => {
             if (err) throw reject(err)
             resolve(data)
