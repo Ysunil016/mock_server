@@ -3,12 +3,14 @@ const express = require("express")
 function create_express_server(props) {
     const { port, apis } = props
     const app = express()
-    
+
     add_router_to_server(app, apis)
 
     app.listen(port, () => {
         console.log(`Success! Your application is running on port ${port}.`);
-    });
+    }).on('close', () => { console.log("Closing Server on " + port); })
+
+    return app
 }
 
 function add_router_to_server(server, apis) {

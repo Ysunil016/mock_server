@@ -10,9 +10,10 @@
                 "response": "{\"Name\":\"Sunil\"}",
                 "status": "200",
                 "update": {
-                    "uri": "",
+                    "uri": "http://localhost:8080/sunil",
                     "token": "",
-                    "method": ""
+                    "method": "GET",
+                    "request_data":""
                 }
             }
         ]
@@ -28,9 +29,10 @@
                 "response": "{\"Name\":\"Yadav\"}",
                 "status": "200",
                 "update": {
-                    "uri": "",
+                    "uri": "http://localhost:8080/yadav",
                     "token": "",
-                    "method": ""
+                    "method": "GET",
+                    "request_data":""
                 }
             }
         ]
