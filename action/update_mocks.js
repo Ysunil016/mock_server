@@ -41,7 +41,7 @@ const make_update_request = async (update_props) => {
 
 const update_json_mock_file = (data) => {
     return new Promise((resolve) => {
-        fs.writeFileSync("./mock_data/data.json", JSON.stringify(data))
+        fs.writeFileSync("./data/config.json", JSON.stringify(data))
         resolve(true)
     })
 }

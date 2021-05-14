@@ -12,8 +12,8 @@
                 },
                 "status": 200,
                 "update": {
-                    "uri": "http://localhost:8080/sunil",
-                    "token": "",
+                    "uri": "https://jsonplaceholder.typicode.com/todos/1",
+                    "headers": {},
                     "method": "GET",
                     "request_data": ""
                 }
@@ -29,15 +29,9 @@
                 "endpoint": "/home",
                 "method": "GET",
                 "response": {
-                    "Yadav": "Name"
+                    "Child_4": "Tripti"
                 },
-                "status": 200,
-                "update": {
-                    "uri": "http://localhost:8080/yadav",
-                    "token": "",
-                    "method": "GET",
-                    "request_data": ""
-                }
+                "status": 200
             }
         ]
     }
