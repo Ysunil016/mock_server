@@ -65,3 +65,12 @@ In order to run the server, follow the steps -
         `/home`, gets the mocked response and status code, for 3002, server configuration
 ```
 ### Docker
+
+
+
+### Dependencies
+
+1. Express
+2. Body-Parser
+3. doenv
+4. Axios
