@@ -1,15 +1,29 @@
-<!-- GETTING STARTED -->
-## Getting Started
+<!-- Mock Server -->
+## Mock Server
 
-Mock_Sever, that will help to make mocking easy, with just an json configuration file.
-<br>
-Mock_Sever is capable of creating multiple servers, based on which servers can server the responses. <br>
-It supports regex, and id based path variables.
+### Reason for Existance 
+
+1. Mock Server, that often updates itself with some live field.
+2. Mock Server, that roll out faster, and can run on multiple ports, based on requirement.
+3. Mock Server, that just need minimal configuration at one place.
+
+### Offering from this Mock Server
+
+1. Well defined, config structure.
+2. Default, Service endpoint, that updates the mocking data.
+3. Upon successful update of mocks, server automatically restarts.
+4. Single, file configuration.
+5. Entire mocking sever start within few seconds.
+6. Mocking supports for regex validation over API.
 
 ### Prerequisites
 
 In order to run the server, follow the steps - 
-* yarn
+* Node
+  ```sh
+  brew install node
+  ```
+* Yarn
   ```sh
   brew install yarn
   ```
@@ -25,9 +39,29 @@ In order to run the server, follow the steps -
    yarn install
    ```
 3. Modify the data.json, as per your need. <br><br>
-4. Install Node Modules packages
+
+4. Start the Sever
    ```sh
    node init.js
    ```
+### Default Ports - 
+```shell
+   Mock Update Server PORT - 7890
    
-5. This will start the update_mock server, with servers given in data json.
+   Mock_One PORT           - 3001  
+   
+   Mock_Two PORT           - 3002  
+```
+
+### Default Endpoints 
+```shell
+   Mock Update Server End Point - 7890
+        `/mock_update`, updates the configuraiton based on latest data fetched from live calls.
+   
+   Mock_One PORT - 3001  
+        `/home`, gets the mocked resposne and status code, for 3001, server configuration
+            
+   Mock_Two PORT - 3002  
+        `/home`, gets the mocked resposne and status code, for 3002, server configuration
+```
+### Docker
