@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+    mock_server:
+        image: sunil016/mock_server:1.0
+        container_name: mock_server
+        volumes:
+            - type: bind
+              source: ./configTest.json
+              target: /app/data/config.json
+              read_only: false
+        ports:
+            - "3001:3001"
+            - "3002:3002"
+            - "7890:7890"
+        restart: always
