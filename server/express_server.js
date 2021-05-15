@@ -1,10 +1,12 @@
 const express = require("express");
 const update_mock = require("../action/update_mocks");
 const router = require("./routes");
+const { json } = require("body-parser");
 function create_express_server(props) {
     return new Promise((resolve) => {
         const {port, apis, prefix} = props;
         const app = express();
+        app.use(json())
         app.use(prefix, router.handle(apis));
         resolve(app.listen(port, () => {
             console.log(`Success! Your application is running on port ${port}.`)
