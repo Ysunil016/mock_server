@@ -5,7 +5,7 @@ services:
         container_name: mock_server
         volumes:
             - type: bind
-              source: ./configTest.json
+              source: ./ccs_data.json
               target: /app/data/config.json
               read_only: false
         ports:

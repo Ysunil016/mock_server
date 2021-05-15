@@ -2,110 +2,91 @@ const fs = require('fs');
 const axios = require('axios');
 const fetch_mock_data = require("./mock_data");
 async function update() {
-    return new Promise(async(resolve, reject) => {
-        const new_mock_data = await fetch_mock_data();
-        new_mock_data.forEach(async(server_prop, server_index) => {
-            const {apis} = server_prop;
-            apis.forEach(async(api, api_index) => {
-                const {update} = api;
-                if (update == undefined) {
-                    return
-                }
-                const response = await make_update_request(update).catch(() => {
-                    console.log("Error While Fetching Data from External Service");
-                    return null
-                });
-                if (response === undefined || response === null) {
-                    reject();
-                    return
-                };
+    const new_mock_data = fetch_mock_data();
+    new_mock_data.forEach((server_prop, server_index) => {
+        const { apis } = server_prop;
+        apis.forEach((api, api_index) => {
+            const { update } = api;
+            if (update == undefined) { return }
+            make_update_request(update).then(response => {
+                if (response === undefined || response === null) return;
                 api.response = response.data;
                 api.status = response.status;
                 apis.splice(api_index, 1, api);
                 server_prop.apis = apis;
                 new_mock_data.splice(server_index, 1, server_prop);
-                await update_json_mock_file(new_mock_data);
-                resolve(true)
-            })
+                update_json_mock_file(new_mock_data);
+            }).catch(() => { throw "Fetching Problem" })
         })
     })
-}
-const make_update_request = async(update_props) => {
+};
+const make_update_request = (update_props) => {
     const {
         uri,
         headers = {},
         method,
         request_data
     } = update_props;
-    return new Promise(async(resolve, reject) => {
-        switch (method) {
-            case 'GET':
-                await get_request(uri, headers)
-                    .then(res => resolve(res))
-                    .catch((err) => reject(err));
-                break;
-            case 'POST':
-                await post_request(uri, headers, request_data)
-                    .then(res => resolve(res))
-                    .catch((err) => reject(err));
-                break;
-            case 'PUT':
-                await put_request(uri, headers, request_data)
-                    .then(res => resolve(res))
-                    .catch((err) => reject(err));
-                break;
-            case 'DELETE':
-                await delete_request(uri, headers)
-                    .then(res => resolve(res))
-                    .catch((err) => reject(err));
-                break;
-            default:
-                reject();
-                break
-        }
-    })
+    switch (method) {
+        case 'GET':
+            return get_request(uri, headers)
+                .then(res => { return res })
+                .catch((err) => { throw err });
+        case 'POST':
+            return post_request(uri, headers, request_data)
+                .then(res => { return res })
+                .catch((err) => { throw err });
+        case 'PUT':
+            return put_request(uri, headers, request_data)
+                .then(res => { return res })
+                .catch((err) => { throw err });
+        case 'DELETE':
+            return delete_request(uri, headers)
+                .then(res => { return res })
+                .catch((err) => { throw err });
+        default:
+            reject();
+            break
+    }
 };
 const update_json_mock_file = (data) => {
-    return new Promise((resolve) => {
-        fs.writeFileSync("./data/config.json", JSON.stringify(data));
-        resolve(true)
-    })
+    fs.writeFileSync("./data/config.json", JSON.stringify(data));
 };
-const get_request = async(uri, headers) => {
-    return await axios
-        .get(uri, {headers: headers})
+const get_request = (uri, headers) => {
+    return axios
+        .get(uri, { headers: headers })
         .then(response => {
-            return {data: response.data, status: response.status}
+            return { data: response.data, status: response.status }
         })
         .catch(err => {
             throw err
         })
 };
-const post_request = async(uri, headers, request_data) => {
-    return await axios
-        .post(uri, request_data, {headers: headers})
+const post_request = (uri, headers, request_data) => {
+    return axios
+        .post(uri, request_data, { headers: headers })
         .then(response => {
-            return {data: response.data, status: response.status}
+            return { data: response.data, status: response.status }
         })
         .catch(err => {
             throw err
         })
 };
-const put_request = async(uri, headers, request_data) => {
-    return await axios
-        .put(uri, request_data, {headers: headers})
+const put_request = (uri, headers, request_data) => {
+    return axios
+        .put(uri, request_data, { headers: headers })
         .then(response => {
-            return {data: response.data, status: response.status}
+            return { data: response.data, status: response.status }
         })
         .catch(err => {
             throw err
         })
 };
-const delete_request = async(uri, headers) => {
-    return await axios
-        .delete(uri, {headers: headers})
+const delete_request = (uri, headers) => {
+    return axios
+        .delete(uri, { headers: headers })
         .then(response => {
-            return {data: response.data, status: response.status}
+            return { data: response.data, status: response.status }
         })
         .catch(err => {
             throw err

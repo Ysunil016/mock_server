@@ -1,19 +1,10 @@
 const fs = require("fs");
-const readMockData = async() => {
-    return new Promise(async(resolve) => {
-        const fileData = await read_file("./data/config.json");
-        const jsonData = JSON.parse(fileData);
-        resolve(jsonData)
-    })
+const readMockData = () => {
+    return JSON.parse(fs.readFileSync("./data/config.json"))
 };
-async function read_file(file_path) {
-    return new Promise(async(resolve, reject) => {
-        fs.readFile(file_path, (err, data) => {
-            if (err) {
-                throw reject(err)
-            }
-            resolve(data)
-        })
+function read_file(file_path) {
+    return new Promise(async (resolve) => {
+        resolve(fs.readFileSync(file_path))
     })
 };
 module.exports = readMockData;
