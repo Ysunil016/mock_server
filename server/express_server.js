@@ -1,29 +1,17 @@
 const express = require("express")
 const update_mock = require("../action/update_mocks")
+const router = require("./routes")
 
 function create_express_server(props) {
     return new Promise((resolve) => {
-        const { port, apis } = props
+        const { port, apis, prefix } = props
         const app = express()
 
-        add_router_to_server(app, apis)
+        app.use(prefix,router.handle(apis)) 
 
         resolve(app.listen(port, () => {
             console.log(`Success! Your application is running on port ${port}.`);
         }).on('close', () => { console.log("Closing Server on " + port); }))
-    })
-}
-
-function add_router_to_server(server, apis) {
-    apis.forEach(api => {
-        create_route(server, api)
-    });
-}
-
-function create_route(server, api) {
-    const { endpoint, response, status } = api
-    server.get(endpoint, (req, res) => {
-        res.json(response).status(status)
     })
 }
 
