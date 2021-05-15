@@ -2,10 +2,10 @@
     {
         "name": "Application_A",
         "port": "3001",
-        "prefix": "/",
+        "prefix": "/sunil",
         "apis": [
             {
-                "endpoint": "/test",
+                "endpoint": "/home",
                 "method": "GET",
                 "response": {
                     "Sunil": "Name"
@@ -29,7 +29,7 @@
                 "endpoint": "/home",
                 "method": "GET",
                 "response": {
-                    "Child_4": "Tripti"
+                    "Name": "Aastha"
                 },
                 "status": 200
             }
